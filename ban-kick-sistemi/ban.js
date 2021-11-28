@@ -9,7 +9,7 @@ exports.run = async (client, message, args) => {
     const banlog = message.guild.channels.cache.get(kanal)
     const kisi = message.mentions.members.first() || client.users.resolve(args[0]) || client.users.cache.find(u => u.username === args[0]) || client.users.cache.get(args[0]); 
     if (!kisi) message.reply(`:x: **Yanlış kullanım! Yasaklayacağım kişiyi etiketlemen gerek.**`)
-    const orospu = client.users.cache.get(kisi.id)
+    const banlanıcak = client.users.cache.get(kisi.id)
     var sebeb = args.slice(1).join(' ') ? args.slice(1).join(' ') : "Sebep Belirtilmemiş"
 
     if(!message.author.id !== message.guild.ownerID) {  
@@ -33,7 +33,7 @@ exports.run = async (client, message, args) => {
 
     const banembed = new Discord.MessageEmbed()
     .setTitle(`İşlem - Kullanıcı Yasaklama`)
-    .setThumbnail(orospu.displayAvatarURL({ dynamic: true }))
+    .setThumbnail(banlanıcak.displayAvatarURL({ dynamic: true }))
     .setDescription(`**Kullanıcı:** ${kisi}\n**Sebep:** ${sebeb}\n**Yetkili:** ${message.author}`)
     .setColor(`RED`)
     .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
