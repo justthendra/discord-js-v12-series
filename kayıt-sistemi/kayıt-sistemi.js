@@ -69,7 +69,7 @@ exports.run = async (client, message, args) => {
         message.channel.send(kayıtlısıfırla)
     }
    
-    // Sıfırlama Sonradan Eklendi
+    // Sistemi Sıfırlama Sonradan Eklendi
    
     if(args[0] === "sıfırla") {
         db.delete(`ThdKayıtlıRol${message.guild.id}`, kayıtlırol.id)
