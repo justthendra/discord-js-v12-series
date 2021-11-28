@@ -39,7 +39,7 @@ if (!muterole2) {
 
 var kisi = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));
 if (!kisi) return message.reply("Susturmasını Açmam İçin Bir Kullanıcı Belirtiniz!");
-const orospu = client.users.cache.get(kisi.id)
+const adam = client.users.cache.get(kisi.id)
 
  if(!kisi.roles.cache.find(r => r.id === muterole2.id)) return message.reply("Kişi Daha Önceden Susturulmamış!")
 
@@ -51,7 +51,7 @@ if(reason){
     message.channel.send(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
     const unmuteembed = new Discord.MessageEmbed()
     .setTitle(`İşlem - Kullanıcı Susturulması Kaldırma`)
-    .setThumbnail(orospu.displayAvatarURL({ dynamic: true }))
+    .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
     .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`)
     .setColor(`GREEN`)
     .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
@@ -62,7 +62,7 @@ if(reason){
     message.channel.send(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
     const unmuteembed2 = new Discord.MessageEmbed()
     .setTitle(`İşlem - Kullanıcı Susturulması Kaldırma`)
-    .setThumbnail(orospu.displayAvatarURL({ dynamic: true }))
+    .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
     .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`)
     .setColor(`GREEN`)
     .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
