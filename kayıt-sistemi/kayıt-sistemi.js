@@ -39,12 +39,12 @@ exports.run = async (client, message, args) => {
 
     if(args[0] === "kayıtsız-sıfırla") {
         db.delete(`ThdKayıtsızRol${message.guild.id}`, kayıtsızrol.id)
-        let kayıtsızayarla = new Discord.MessageEmbed()
+        let kayıtsızsıfırla = new Discord.MessageEmbed()
         .setTitle(`<:onay:894244398940954654> Kayıtsız Rolü Sıfırlandı`)
         .setDescription(`<:onay:894244398940954654> Kayıtsız Rolü Başarıyla Sıfırlandı.\nAyarlamak İstiyorsanız \`t!kayıt kayıtsız-ayarla @rol\` Yazmanız Yeterlidir Olacaktır.`)
         .setColor('GREEN')
         .setFooter(`© 2021 Thendra - Kayıt Sistemi`, client.user.displayAvatarURL())
-        message.channel.send(kayıtsızayarla)
+        message.channel.send(kayıtsızsıfırla)
     }
 
     if(args[0] === "kayıtlı-ayarla") {
@@ -61,12 +61,27 @@ exports.run = async (client, message, args) => {
 
     if(args[0] === "kayıtlı-sıfırla") {
         db.delete(`ThdKayıtlıRol${message.guild.id}`, kayıtlırol.id)
-        let kayıtsızayarla = new Discord.MessageEmbed()
+        let kayıtlısıfırla = new Discord.MessageEmbed()
         .setTitle(`<:onay:894244398940954654> Kayıtlı Rolü Sıfırlandı`)
         .setDescription(`<:onay:894244398940954654> Kayıtlı Rolü Başarıyla Sıfırlandı.\nAyarlamak İstiyorsanız \`t!kayıt kayıtlı-ayarla @rol\` Yazmanız Yeterlidir Olacaktır.`)
         .setColor('GREEN')
         .setFooter(`© 2021 Thendra - Kayıt Sistemi`, client.user.displayAvatarURL())
-        message.channel.send(kayıtsızayarla)
+        message.channel.send(kayıtlısıfırla)
+    }
+   
+    // Sıfırlama Sonradan Eklendi
+   
+    if(args[0] === "sıfırla") {
+        db.delete(`ThdKayıtlıRol${message.guild.id}`, kayıtlırol.id)
+        db.delete(`ThdKayıtsızRol${message.guild.id}`, kayıtsızrol.id)
+        db.delete(`ThdKayıtYetki${message.guild.id}`, kayıtsızrol.id)
+        db.delete(`ThdKayıtKanal${message.guild.id}`)
+        let sıfırla = new Discord.MessageEmbed()
+        .setTitle(`<:onay:894244398940954654> Kayıt Sistemi Sıfırlandı`)
+        .setDescription(`<:onay:894244398940954654> Kayıt Sistemi Başarıyla Sıfırlandı.\nTekrar Ayarlamak İsterseniz Bütün Argümanları Tekrardan Girmeniz Gerekiyor.`)
+        .setColor('GREEN')
+        .setFooter(`© 2021 Thendra - Kayıt Sistemi`, client.user.displayAvatarURL())
+        message.channel.send(sıfırla)
     }
 }
 
