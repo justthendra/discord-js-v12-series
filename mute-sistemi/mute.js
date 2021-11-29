@@ -55,10 +55,10 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle **SINIRSIZ** Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed)
-    } else {
+    } else { // Sebep belirtilmediyse
         await kisi.roles.add(muterole2.id);
         message.channel.send(`${kisi} **SINIRSIZ** Şekilde Susturuldu!\n**Yetkili:** ${message.author}`);
         const muteembed2 = new Discord.MessageEmbed()
@@ -66,14 +66,14 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **SINIRSIZ** Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed2)
     };
 
 } else {
     
-    if(reason){
+    if(reason){ // Hem zaman hem de sebep belirtildiyse
         await kisi.roles.add(muterole2.id);
         message.channel.send(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle **${time}** Süresince Şekilde Susturuldu!`);
         const muteembed3 = new Discord.MessageEmbed()
@@ -81,12 +81,12 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle **${time}** Süresince Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed3)
        
        
-           setTimeout(function() {
+           setTimeout(function() { // Mute süresi bitti
             if(kisi.roles.cache.find(r => r.id === muterole2.id)){
               kisi.roles.remove(muterole2.id)
               const unmuteembed = new Discord.MessageEmbed()
@@ -94,25 +94,25 @@ if (!time) {
               .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
               .setDescription(`**${kisi}** İsimli Kullanıcının Susturulma Süresi Dolduğu İçin Susturulması Kaldırılmıştır.`)
               .setColor(`GREEN`)
-              .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+              .setFooter(`© 2021 Thendra`, client.user.avatarURL())
               .setTimestamp()
               mutelog.send(unmuteembed)
             }
            }, ms(time));
 
-    } else {
+    } else { // Sebep belirtilmemiş - Süre belirtilmiş
         await kisi.roles.add(muterole2.id);
-        message.channel.send(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle Susturuldu!`);
+        message.channel.send(`**${kisi}** İsimli Kullanıcı **${time}** Süreyle Susturuldu!`);
         const muteembed4 = new Discord.MessageEmbed()
         .setTitle(`İşlem - Kullanıcı Susturuldu`)
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
-        .setDescription(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle Susturuldu!\n**Yetkili:** ${message.author}`)
+        .setDescription(`**${kisi}** İsimli Kullanıcı **${time}** Süreyle Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed4)
 
-        setTimeout(function() {
+        setTimeout(function() { // Süre Bittiğinde
             if(kisi.roles.cache.find(r => r.id === muterole2.id)){
                 kisi.roles.remove(muterole2.id)
               const unmuteembed2 = new Discord.MessageEmbed()
@@ -120,7 +120,7 @@ if (!time) {
               .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
               .setDescription(`**${kisi}** İsimli Kullanıcının Susturulma Süresi Dolduğu İçin Susturulması Kaldırılmıştır.`)
               .setColor(`GREEN`)
-              .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
+              .setFooter(`© 2021 Thendra`, client.user.avatarURL())
               .setTimestamp()
               mutelog.send(unmuteembed2)
             }
