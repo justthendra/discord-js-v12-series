@@ -1,7 +1,7 @@
-# Discord.JS V12 Serisi Thendra Dev.
+# Discord.JS V12 Serisi by Thendra
 
-> Discord Sunucumuz: https://discord.gg/mRNurgF87h
+> Discord: Thendra#0409
 
 > Thendra Youtube: https://www.youtube.com/channel/UCouorHGsUWdkk0lf39aKSFQ
 
-**We Are Everywhere**
+**I Am Everywhere**
