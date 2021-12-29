@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
     .setColor("RED")
     .setFooter(`© 2021 Akhyls`, client.user.avatarURL())
     .setTimestamp()
-    orospu.send(sucembeddm).then(banmemb => {
+    kicklenaga.send(sucembeddm).then(banmemb => {
         message.guild.members.kick(kisi, { reason: sebeb });
     });
 }
