@@ -26,7 +26,7 @@ client.on('guildMemberAdd', async member => {
 
   let bitiş = member.user.createdAt
       let günü = moment(new Date(bitiş).toISOString()).format('DD')
-      let ayı = moment(new Date(bitiş).toISOString()).format('MM').replace("01", "Ocak").replace("02","Şubat").replace("03","Mart").replace("04", "Nisan").replace("05", "Mayıs").replace("06", "Haziran").replace("07", "Temmuz").replace("08", "Ağustos").replace("09", "Eylül").replace("10","Ekim").replace("11","Kasım").replace("12","Aralık").replace("13","CodAre")//codare
+      let ayı = moment(new Date(bitiş).toISOString()).format('MM').replace("01", "Ocak").replace("02","Şubat").replace("03","Mart").replace("04", "Nisan").replace("05", "Mayıs").replace("06", "Haziran").replace("07", "Temmuz").replace("08", "Ağustos").replace("09", "Eylül").replace("10","Ekim").replace("11","Kasım").replace("12","Aralık")
      let yılı =  moment(new Date(bitiş).toISOString()).format('YYYY')
      let saati = moment(new Date(bitiş).toISOString()).format('HH:mm')
 
