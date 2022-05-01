@@ -1,7 +1,7 @@
 # Discord.JS V12 Serisi by Thendra
 
-> Discord: Thendra#0409
+> Discord: curwels inş#6816
 
-> Thendra Youtube: https://www.youtube.com/channel/UCouorHGsUWdkk0lf39aKSFQ
+> Curwels Youtube: https://www.youtube.com/channel/UCouorHGsUWdkk0lf39aKSFQ
 
 **I Am Everywhere**
