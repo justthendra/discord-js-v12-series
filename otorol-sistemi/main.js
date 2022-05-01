@@ -48,10 +48,10 @@ let günay = `${günü} ${ayı} ${yılı} ${saati}`
      if(süre < 1296000000) kontrol = 'Tehlikeli! ❌'
      if(süre > 1296000000) kontrol = 'Güvenilir! <:onay:894244398940954654>'
     
-    let thendras = new Discord.MessageEmbed()
+    let curwels = new Discord.MessageEmbed()
      .setColor('GREEN')
      .setDescription(`<:onay:894244398940954654> **Sunucuya Yeni Katılan** **<@${member.id}>** **İsimli Kullanıcıya** ${rol2} **Rolünü Verdim.**\n\n👋🏻 **Hoşgeldin, <@${member.id}>**!\n\nHesap Güvenilir mi? **${kontrol}**`)
      .setTimestamp()
      .setFooter(`© 2021 Akhyls - Otorol Sistemi`, client.user.displayAvatarURL())
-     kanal2.send(thendras)
+     kanal2.send(curwels)
 })
