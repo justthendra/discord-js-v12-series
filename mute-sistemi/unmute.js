@@ -3,11 +3,11 @@ const db = require('quick.db');
 const ms = require("ms");
 
 exports.run = async (client, message, args) => {    
-if (db.has(`ThdMuteLog_${message.guild.id}`) === false) return message.reply(`Mute-Log Kanalı Ayarlanmamış. Örnek: \`t!mutelog ayarla <#kanal>\``);
-const kanal = db.get(`ThdMuteLog_${message.guild.id}`)
+if (db.has(`CwlMuteLog_${message.guild.id}`) === false) return message.reply(`Mute-Log Kanalı Ayarlanmamış. Örnek: \`c!mutelog ayarla <#kanal>\``);
+const kanal = db.get(`CwlMuteLog_${message.guild.id}`)
 const mutelog = message.guild.channels.cache.get(kanal)
 
-var muterole1 = db.fetch(`ThdMuteRol_${message.guild.id}`);
+var muterole1 = db.fetch(`CwlMuteRol_${message.guild.id}`);
 var muterole2 = message.guild.roles.cache.find(r => r.id === muterole1);
 if (!muterole2) {
     try {
@@ -21,7 +21,7 @@ if (!muterole2) {
             reason: 'Mute Rolü!' 
             })
 
-        db.set(`ThdMuteRol_${message.guild.id}`, muterole2.id);
+        db.set(`CwlMuteRol_${message.guild.id}`, muterole2.id);
 
         message.guild.channels.cache.forEach(async (channel) => {
             await channel.createOverwrite(muterole2, {
@@ -54,7 +54,7 @@ if(reason){ // Sebep Belirtildiyse
     .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
     .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}\n **Sebep:** ${reason}`)
     .setColor(`GREEN`)
-    .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+    .setFooter(`© 2021 Curwels`, client.user.avatarURL())
     .setTimestamp()
     mutelog.send(unmuteembed)
 } else { // Sebep belirtilmediyse
@@ -65,7 +65,7 @@ if(reason){ // Sebep Belirtildiyse
     .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
     .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`)
     .setColor(`GREEN`)
-    .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+    .setFooter(`© 2021 Curwels`, client.user.avatarURL())
     .setTimestamp()
     mutelog.send(unmuteembed2)
 };
