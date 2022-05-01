@@ -5,21 +5,21 @@ exports.run = async (client, message, args) => {
     const kanal = message.mentions.channels.first()
     if(!kanal) return message.channel.send("❌ Bir kanal etiketlemeyi unuttun! Doğru kullanım: `t!kayıt-kanal #kanal`")
 
-    db.set(`ThdKayıtKanal${message.guild.id}`, kanal.id)
+    db.set(`CwlKayıtKanal${message.guild.id}`, kanal.id)
     let kanalayarla = new Discord.MessageEmbed()
     .setTitle(`<:onay:894244398940954654> Kayıt Kanalı Ayarlandı`)
     .setDescription(`<:onay:894244398940954654> Kayıt Kanalı Başarıyla ${kanal} Olarak Ayarlandı.\nSıfırlamak İstiyorsanız \`t!kayıt-kanal sıfırla\` Yazmanız Yeterlidir Olacaktır.`)
     .setColor('GREEN')
-    .setFooter(`© 2021 Thendra - Kayıt Sistemi`, client.user.displayAvatarURL())
+    .setFooter(`© 2021 Curwels - Kayıt Sistemi`, client.user.displayAvatarURL())
     message.channel.send(kanalayarla)
 
     if(args[0] === "sıfırla") {
-        db.delete(`ThdKayıtKanal${message.guild.id}`)
+        db.delete(`CwlKayıtKanal${message.guild.id}`)
         let kanalayarla = new Discord.MessageEmbed()
         .setTitle(`<:onay:894244398940954654> Kayıt Kanalı Sıfırlandı`)
         .setDescription(`<:onay:894244398940954654> Kayıt Kanalı Başarıyla Sıfırlandı.\nAyarlamak İstiyorsanız \`t!kayıt-kanal #kanal\` Yazmanız Yeterlidir Olacaktır.`)
         .setColor('GREEN')
-        .setFooter(`© 2021 Thendra - Kayıt Sistemi`, client.user.displayAvatarURL())
+        .setFooter(`© 2021 Curwels - Kayıt Sistemi`, client.user.displayAvatarURL())
         message.channel.send(kanalayarla)
     }
 }
