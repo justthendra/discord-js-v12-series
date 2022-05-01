@@ -4,8 +4,8 @@ const ms = require("ms");
 
 exports.run = async (client, message, args) => {    
 const sunucu = message.guild.id;
-if (db.has(`ThdMuteLog_${message.guild.id}`) === false) return message.reply(`Mute-Log Kanalı Ayarlanmamış. Örnek: \`a-mutelog ayarla <#kanal>\``);
-const kanal = db.get(`ThdMuteLog_${message.guild.id}`)
+if (db.has(`CwlMuteLog_${message.guild.id}`) === false) return message.reply(`Mute-Log Kanalı Ayarlanmamış. Örnek: \`a-mutelog ayarla <#kanal>\``);
+const kanal = db.get(`CwlMuteLog_${message.guild.id}`)
 const mutelog = message.guild.channels.cache.get(kanal)
 
 
@@ -23,7 +23,7 @@ if (!muterole2) {
             reason: 'Mute Rolü!' 
             })
 
-        db.set(`ThdMuteRol_${message.guild.id}`, muterole2.id);
+        db.set(`CwlMuteRol_${message.guild.id}`, muterole2.id);
 
         message.guild.channels.cache.forEach(async (channel) => {
             await channel.createOverwrite(muterole2, {
@@ -55,7 +55,7 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle **SINIRSIZ** Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+        .setFooter(`© 2021 Curwels`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed)
     } else { // Sebep belirtilmediyse
@@ -66,7 +66,7 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **SINIRSIZ** Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+        .setFooter(`© 2021 Curwels`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed2)
     };
@@ -81,7 +81,7 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **${reason}** Nedeniyle **${time}** Süresince Şekilde Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+        .setFooter(`© 2021 Curwels`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed3)
        
@@ -94,7 +94,7 @@ if (!time) {
               .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
               .setDescription(`**${kisi}** İsimli Kullanıcının Susturulma Süresi Dolduğu İçin Susturulması Kaldırılmıştır.`)
               .setColor(`GREEN`)
-              .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+              .setFooter(`© 2021 Curwels`, client.user.avatarURL())
               .setTimestamp()
               mutelog.send(unmuteembed)
             }
@@ -108,7 +108,7 @@ if (!time) {
         .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
         .setDescription(`**${kisi}** İsimli Kullanıcı **${time}** Süreyle Susturuldu!\n**Yetkili:** ${message.author}`)
         .setColor(`RED`)
-        .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+        .setFooter(`© 2021 Curwels`, client.user.avatarURL())
         .setTimestamp()
         mutelog.send(muteembed4)
 
@@ -120,7 +120,7 @@ if (!time) {
               .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
               .setDescription(`**${kisi}** İsimli Kullanıcının Susturulma Süresi Dolduğu İçin Susturulması Kaldırılmıştır.`)
               .setColor(`GREEN`)
-              .setFooter(`© 2021 Thendra`, client.user.avatarURL())
+              .setFooter(`© 2021 Curwels`, client.user.avatarURL())
               .setTimestamp()
               mutelog.send(unmuteembed2)
             }
