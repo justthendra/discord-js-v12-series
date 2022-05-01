@@ -52,10 +52,10 @@ let günay = `${günü} ${ayı} ${yılı} ${saati}`
 
      member.roles.add(kayıtsızroles)
 
-     let thendras = new Discord.MessageEmbed()
+     let curwels = new Discord.MessageEmbed()
      .setColor('GREEN')
      .setDescription(`👋🏻 Hoşgeldin, <@${member.id}>!\n<:onay:894244398940954654> **Kaydının Yapılması için bir Kayıt Yetkilisini Ya da Yetkiliyi Etiketle.**\n\n🧾 **Bu Sunucuya Katıldığından İtibaren Kuralları Kabul Etmiş Sayılacaksın, Bu Yüzden Kurallar Kanalına Bakmayı Unutma!**\n\n**${yetkili}**\n\nHesap Güvenilir mi? **${kontrol}**`)
-     //.setDescription('<@'+member.id+'> Bilgileri : \n\n  Hesap oluşturulma tarihi **[' + created + ']** (`' + günay + '`) \n\n Hesap Durumu : **' + kontrol + '**') // Thendra Ab
+     //.setDescription('<@'+member.id+'> Bilgileri : \n\n  Hesap oluşturulma tarihi **[' + created + ']** (`' + günay + '`) \n\n Hesap Durumu : **' + kontrol + '**') // Curwels Ab
      .setTimestamp()
-     client.channels.cache.get(kanal).send(thendras)
+     client.channels.cache.get(kanal).send(curwels)
 })
