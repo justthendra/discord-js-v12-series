@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
     if(args[0] == "ayarla") {
     const kanal = message.mentions.channels.first()
     if(!kanal) return message.reply(`:x: **Yanlış Kullanım! Örnek: a-mutelog ayarla #kanal**`)
-    db.set(`ThdMuteLog_${message.guild.id}`, kanal.id)
+    db.set(`CwlMuteLog_${message.guild.id}`, kanal.id)
 
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Akhyls - Mute-Log Sistemi`)
@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
 
     if(args[0] == "sıfırla") {
 
-    db.delete(`ThdMuteLog_${message.guild.id}`)
+    db.delete(`CwlMuteLog_${message.guild.id}`)
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Akhyls - Mute-Log Sistemi`)
     .setDescription(`<:onay:894244398940954654> Mute-Log Kanalı başarıyla sıfırlandı!`)
