@@ -5,15 +5,15 @@ exports.run = async (client, message) => {
 
     let user = message.mentions.members.first()  // Uyarısı Silinecek Kişi
     message.guild.members.cache.forEach(user => {
-        db.delete(`ThdUyarıKullanıcı_${message.guild.id}_${user.user.id}`)
+        db.delete(`CwlUyarıKullanıcı_${message.guild.id}_${user.user.id}`)
     })
     
 
     let embed = new Discord.MessageEmbed()
-        .setAuthor(`Thendra - Uyarı Sistemi`)
+        .setAuthor(`Curwels - Uyarı Sistemi`)
         .addField("Uyarı Sıfırlandı", `\n**${message.author}** İsimli Yetkili **${user}** İsimli Kullanıcının Uyarılarını Sıfırladı!`)
         .setColor(`WHITE`)
-        .setFooter("© 2021 Thendra", client.user.avatarURL())
+        .setFooter("© 2021 Curwels", client.user.avatarURL())
         .setTimestamp()
         message.channel.send(embed)
 };
