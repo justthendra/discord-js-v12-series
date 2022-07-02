@@ -1,4 +1,4 @@
-# Discord.JS V12 Serisi by Thendra
+# Discord.JS V12 Series by Curwels 
 
 > Discord: curwels inş#6816
 
