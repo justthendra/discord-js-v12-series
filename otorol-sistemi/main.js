@@ -1,9 +1,9 @@
 // Otorol Sistemi V2
 
 client.on('guildMemberAdd', async member => {
-    const kanal = db.fetch(`CwlOtorolKanal_${member.guild.id}`)
+    const kanal = db.fetch(`ThdOtorolKanal_${member.guild.id}`)
     const kanal2 = member.guild.channels.cache.get(kanal)
-    const rol = await db.fetch(`CwlOtorol_${member.guild.id}`)
+    const rol = await db.fetch(`ThdOtorol_${member.guild.id}`)
     const rol2 = member.guild.roles.cache.get(rol)
     member.roles.add(rol2);
 
