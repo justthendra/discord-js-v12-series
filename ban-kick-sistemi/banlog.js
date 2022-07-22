@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
     if(args[0] == "ayarla") {
     const kanal = message.mentions.channels.first()
     if(!kanal) return message.reply(`:x: **Yanlış Kullanım! Örnek: a-banlog ayarla #kanal**`)
-    db.set(`CwlBanLog_${message.guild.id}`, kanal.id)
+    db.set(`ThdBanLog_${message.guild.id}`, kanal.id)
 
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Akhyls - Ban-Log Sistemi`)
@@ -19,7 +19,7 @@ exports.run = (client, message, args) => {
 
     if(args[0] == "sıfırla") {
 
-    db.delete(`CwlBanLog_${message.guild.id}`)
+    db.delete(`ThdBanLog_${message.guild.id}`)
     const embed = new Discord.MessageEmbed()
     .setAuthor(`Akhyls - Ban-Log Sistemi`)
     .setDescription(`<:onay:894244398940954654> Ban-Log Kanalı başarıyla sıfırlandı!`)
