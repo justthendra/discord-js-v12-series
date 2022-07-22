@@ -4,7 +4,7 @@ const delay = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
 
 exports.run = async (client, message, args) => {
     const sunucu = message.guild.id;
-    if (db.has(`CwlBanLog_${message.guild.id}`) === false) return message.reply(`Ban-Log Kanalı Ayarlanmamış. Örnek: \`a-banlog ayarla <#kanal>\``);
+    if (db.has(`ThdBanLog_${message.guild.id}`) === false) return message.reply(`Ban-Log Kanalı Ayarlanmamış. Örnek: \`a-banlog ayarla <#kanal>\``);
     const kanal = db.get(`CwlBanLog_${message.guild.id}`)
     const banlog = message.guild.channels.cache.get(kanal)
     const kisi = message.mentions.members.first() || client.users.resolve(args[0]) || client.users.cache.find(u => u.username === args[0]) || client.users.cache.get(args[0]); 
