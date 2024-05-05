@@ -3,8 +3,8 @@ const db = require('quick.db')
 
 exports.run = async (client, message) => {
 
-    let kanal = message.mentions.channels.first()
-    if(!kanal) return message.reply(`Kanal Etiketlemeyi Unuttun!`)
+    let channel = message.mentions.channels.first()
+    if(!channel) return message.reply(`Kanal Etiketlemeyi Unuttun!`)
 
     db.set(`ThdUyarıLog_${message.guild.id}`, kanal.id)
     let embed = new Discord.MessageEmbed()
