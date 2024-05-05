@@ -5,229 +5,228 @@ const db = require("quick.db")
 exports.run = async(client, message, args) => {
 
  if (message.guild == null) return
-    const islem = args[0]
+    const process = args[0]
 
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
-      const yetkinyokmeh = new discord.MessageEmbed()
+      const notAuthority = new discord.MessageEmbed()
         .setAuthor("❌ Yetersiz Yetki!")
         .setDescription("**Bu Komudu Kullanman İçin `Yönetici` Yetkisine Sahip Olmalısın!**")
         .setColor("RED")
-      return message.channel.send(yetkinyokmeh)
+      return message.channel.send(notAuthority)
     }
 
 
 
-    if (!islem) {
-      const islemyok = new discord.MessageEmbed()
+    if (!process) {
+      const notProces = new discord.MessageEmbed()
         .setAuthor("❌ Argüman Eksik!")
         .setDescription("**Bir İşlem Belirtmelisiniz!**")
         .setColor("RED")
-      return message.channel.send(islemyok)
+      return message.channel.send(notProcess)
     }
-    var islemlerarr = ["yardım", "başlat", "say", "çağır", "bitir"]
-    if (!islemlerarr.includes(islem.toLowerCase())) {
-      const yanlisislem = new discord.MessageEmbed()
+    var processArg = ["yardım", "başlat", "say", "çağır", "bitir"]
+    if (!processArg.includes(process.toLowerCase())) {
+      const wrongProc = new discord.MessageEmbed()
         .setAuthor("❌ Yanlış Argüman!")
         .setDescription("**İşlemler Şunlar Olabilir; **" + "`" + "yardım, başlat, say, çağır, bitir" + "`")
         .setColor("RED")
-      return message.channel.send(yanlisislem)
+      return message.channel.send(wrongProc)
     }
 
-    if (islem.toLowerCase() == "başlat") {
-      const kanalget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
-      if (kanalget == null) {
-        const kanalyok = new discord.MessageEmbed()
+    if (process.toLowerCase() == "başlat") {
+      const channel = db.fetch(`guildtoplantichannel_${message.guild.id}`)
+      if (channel == null) {
+        const notChannel = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Kanalı Belirtilmemiş!")
           .setColor("RED")
           .setDescription("**Toplantıyı Başlatmak İçin Toplantı Kanalı Belirtilmelidir!**")
-        return message.channel.send(kanalyok)
+        return message.channel.send(notChannel)
       }
 
-      const stafflar = db.fetch(`guildstaff_${message.guild.id}`)
-      if (stafflar == null) {
-        const embedstafflaryok = new discord.MessageEmbed()
+      const staffs = db.fetch(`guildstaff_${message.guild.id}`)
+      if (staffs == null) {
+        const notStaffs = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Rolü Belirtilmemiş!")
           .setDescription("**Bu Komudu Kullanmadan Önce Sunucu İçindeki Yetkilileri Belirlemelisiniz!**")
           .setColor("RED")
-        return message.channel.send(embedstafflaryok)
+        return message.channel.send(notStaffs)
       }
-      const rolget = db.fetch(`toplantirol_${message.guild.id}`)
-      const rolfetch = message.guild.roles.cache.get(rolget)
-      const kanalfetch = client.channels.cache.get(kanalget)
+      const roleget = db.fetch(`toplantirol_${message.guild.id}`)
+      const rolefetch = message.guild.roles.cache.get(roleget)
+      const channelfetch = client.channels.cache.get(channel)
       try {
-        await kanalfetch.createOverwrite(rolfetch, {
+        await channelfetch.createOverwrite(rolefetch, {
           VIEW_CHANNEL: true
         })
 
 
-        const sucembed = new discord.MessageEmbed()
+        const guiltEmb = new discord.MessageEmbed()
           .setAuthor("✅ Başarılı!")
           .setDescription("**Belirtilen Kanal Belirttiğiniz Yetkili Rolü İçin Açıldı**")
           .setColor("GREEN")
-        message.channel.send(sucembed)
+        message.channel.send(guiltEmb)
         db.set(`toplantidurum_${message.guild.id}`, "basladi")
       } catch (e) {
-        const yetkimyok = new discord.MessageEmbed()
+        const notAuthor = new discord.MessageEmbed()
           .setAuthor("❌ Yetkim Yetersiz!")
           .setDescription("**Toplantı Rolünün Belirttiğiniz Kanal Üzerindeki Yetkilerini Değiştirmek İçin Yetkim Yetersiz!**")
           .setColor("RED")
-        return message.channel.send(yetkimyok)
+        return message.channel.send(notAuthor)
       }
 
-    } else if(islem.toLowerCase() == "say") {
-      var sucstring = ""
-      const durumfetch = db.fetch(`toplantidurum_${message.guild.id}`)
-      if(durumfetch == null) {
-        const baslatmamış = new discord.MessageEmbed()
+    } else if(process.toLowerCase() == "say") {
+      var guiltstring = ""
+      const statusfetch = db.fetch(`toplantidurum_${message.guild.id}`)
+      if(statusfetch == null) {
+        const notStarted = new discord.MessageEmbed()
         .setAuthor("❌ Önce Toplantıyı Başlatmalısın!")
         .setColor("RED")
         .setDescription("**Sesli Kanaldaki Üyelerin Aktifliğini Kontrol Etmek İçin Önce Toplantıyı Başlatmalısınız!**")
-        return message.channel.send(baslatmamış)
+        return message.channel.send(notStarted)
       }
-      const kanalget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
-      if (kanalget == null) {
-        const kanalyok = new discord.MessageEmbed()
+      const channelget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
+      if (channelget == null) {
+        const notChannel = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Kanalı Belirtilmemiş!")
           .setColor("RED")
           .setDescription("**Toplantıyı Başlatmak İçin Toplantı Kanalı Belirtilmelidir!**")
-        return message.channel.send(kanalyok)
+        return message.channel.send(notChannel)
       }
 
-      const stafflar = db.fetch(`guildstaff_${message.guild.id}`)
-      if (stafflar == null) {
-        const embedstafflaryok = new discord.MessageEmbed()
+      const staffs = db.fetch(`guildstaff_${message.guild.id}`)
+      if (staffs == null) {
+        const notStaffs = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Rolü Belirtilmemiş!")
           .setDescription("**Bu Komudu Kullanmadan Önce Sunucu İçindeki Yetkilileri Belirlemelisiniz!**")
           .setColor("RED")
-        return message.channel.send(embedstafflaryok)
+        return message.channel.send(notStaffs)
       }
 
-      const kanalfetch = client.channels.cache.get(kanalget)
-      const members = kanalfetch.members
+      const channelfetch = client.channels.cache.get(channelget)
+      const members = channelfetch.members
 
 
 
-      var stafflarobj = []
-      stafflar.forEach(staff => {
-       stafflarobj.push(message.guild.members.cache.get(staff.userID))
+      var staffsobj = []
+      staffs.forEach(staff => {
+       staffsobj.push(message.guild.members.cache.get(staff.userID))
       })
-      stafflarobj.forEach(member => {
-        var aktiflik = null
+      staffsobj.forEach(member => {
+        var activty = null
         if(member.voice.channel) {
-          if(member.voice.channel.id == kanalget) {
-            aktiflik = "Toplantıda"
+          if(member.voice.channel.id == channelget) {
+            activity = "Toplantıda"
           }
         } else {
-          aktiflik = "Toplantıda Değil"
+          activty = "Toplantıda Değil"
         }
-        sucstring +=  "**" + member.user.tag +  " | "  + member.user.presence.status + " | " + aktiflik +"**"+ "\n"
+        guiltstring +=  "**" + member.user.tag +  " | "  + member.user.presence.status + " | " + activity +"**"+ "\n"
       })
-      const sucembed = new discord.MessageEmbed()
+      const guiltEmb = new discord.MessageEmbed()
       .setAuthor("Toplantı İçinde Olması Gereken Yetkililerin Durumları")
-      .setDescription(sucstring)
+      .setDescription(guiltstring)
       .setColor("GREEN")
-    message.channel.send(sucembed)
-    } else if(islem.toLowerCase() == "bitir") {
-      const kanalget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
-      if (kanalget == null) {
-        const kanalyok = new discord.MessageEmbed()
+    message.channel.send(guiltEmb)
+    } else if(process.toLowerCase() == "bitir") {
+      const channelget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
+      if (channelget == null) {
+        const notChannel = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Kanalı Belirtilmemiş!")
           .setColor("RED")
           .setDescription("**Toplantıyı Başlatmak İçin Toplantı Kanalı Belirtilmelidir!**")
-        return message.channel.send(kanalyok)
+        return message.channel.send(notChannel)
       }
 
-      const stafflar = db.fetch(`guildstaff_${message.guild.id}`)
-      if (stafflar == null) {
-        const embedstafflaryok = new discord.MessageEmbed()
+      const staffs = db.fetch(`guildstaff_${message.guild.id}`)
+      if (staffs == null) {
+        const notStaffs = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Rolü Belirtilmemiş!")
           .setDescription("**Bu Komudu Kullanmadan Önce Sunucu İçindeki Yetkilileri Belirlemelisiniz!**")
           .setColor("RED")
-        return message.channel.send(embedstafflaryok)
+        return message.channel.send(notStaffs)
       }
-      const rolget = db.fetch(`toplantirol_${message.guild.id}`)
-      const rolfetch = message.guild.roles.cache.get(rolget)
-      const kanalfetch = client.channels.cache.get(kanalget)
+      const roleget = db.fetch(`toplantirol_${message.guild.id}`)
+      const rolefetch = message.guild.roles.cache.get(roleget)
+      const channelfetch = client.channels.cache.get(channelget)
       try {
-        await kanalfetch.createOverwrite(rolfetch, {
+        await channelfetch.createOverwrite(rolefetch, {
           VIEW_CHANNEL: false
         })
 
 
-        const sucembed = new discord.MessageEmbed()
+        const guiltEmb = new discord.MessageEmbed()
           .setAuthor("✅ Başarılı!")
           .setDescription("**Belirtilen Kanal Belirttiğiniz Yetkili Rolü İçin Kapandı**")
           .setColor("GREEN")
-        message.channel.send(sucembed)
+        message.channel.send(guiltEmb)
         db.delete(`toplantidurum_${message.guild.id}`)
       } catch (e) {
-        const yetkimyok = new discord.MessageEmbed()
+        const notAuthor = new discord.MessageEmbed()
           .setAuthor("❌ Yetkim Yetersiz!")
           .setDescription("**Toplantı Rolünün Belirttiğiniz Kanal Üzerindeki Yetkilerini Değiştirmek İçin Yetkim Yetersiz!**")
           .setColor("RED")
-        return message.channel.send(yetkimyok)
+        return message.channel.send(notAuthor)
       }
-    } else if(islem.toLowerCase() == "çağır") {
-      var sucstring = ""
-      const durumfetch = db.fetch(`toplantidurum_${message.guild.id}`)
-      if(durumfetch == null) {
-        const baslatmamış = new discord.MessageEmbed()
+    } else if(process.toLowerCase() == "çağır") {
+      var guiltstring = ""
+      const statusfetch = db.fetch(`toplantidurum_${message.guild.id}`)
+      if(statusfetch == null) {
+        const notStarted = new discord.MessageEmbed()
         .setAuthor("❌ Önce Toplantıyı Başlatmalısın!")
         .setColor("RED")
         .setDescription("**Kanalda Olmayan Kişileri Çağırmadan Önce Toplantıyı Başlatmalısınız!**")
-        return message.channel.send(baslatmamış)
+        return message.channel.send(notStarted)
       }
-      const kanalget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
-      if (kanalget == null) {
-        const kanalyok = new discord.MessageEmbed()
+      const channelget = db.fetch(`guildtoplantichannel_${message.guild.id}`)
+      if (channelget == null) {
+        const notChannel = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Kanalı Belirtilmemiş!")
           .setColor("RED")
           .setDescription("**Toplantıyı Başlatmak İçin Toplantı Kanalı Belirtilmelidir!**")
-        return message.channel.send(kanalyok)
+        return message.channel.send(notChannel)
       }
 
-      const stafflar = db.fetch(`guildstaff_${message.guild.id}`)
-      if (stafflar == null) {
-        const embedstafflaryok = new discord.MessageEmbed()
+      const staffs = db.fetch(`guildstaff_${message.guild.id}`)
+      if (staffs == null) {
+        const notStaffs = new discord.MessageEmbed()
           .setAuthor("❌ Toplantı Rolü Belirtilmemiş!")
           .setDescription("**Bu Komudu Kullanmadan Önce Sunucu İçindeki Yetkilileri Belirlemelisiniz!**")
           .setColor("RED")
-        return message.channel.send(embedstafflaryok)
+        return message.channel.send(notStaffs)
       }
 
-      const kanalfetch = client.channels.cache.get(kanalget)
+      const channelfetch = client.channels.cache.get(kanalget)
       const members = kanalfetch.members
 
 
 
-      var stafflarobj = []
-      stafflar.forEach(staff => {
-       stafflarobj.push(message.guild.members.cache.get(staff.userID))
+      var staffsobj = []
+      staffs.forEach(staff => {
+       staffsobj.push(message.guild.members.cache.get(staff.userID))
       })
-      stafflarobj.forEach(member => {
+      staffsobj.forEach(member => {
         if(member.voice.channel) {
-          if(member.voice.channel.id == kanalget) {
-           // aktiflik = "Toplantıda"
+          if(member.voice.channel.id == channelget) {
           }
         } else {
           try{
-            const toplantıyagel = new discord.MessageEmbed()
+            const comeMeet = new discord.MessageEmbed()
             .setAuthor(message.guild.name + " Adlı Sunucudan Çağırılıyorsunuz")
             .setDescription("**Toplantı Başladı Katılımınız Bekleniyor**")
             .setColor("GREEN")
-            member.send(toplantıyagel)
+            member.send(comeMeet)
           } catch(e) {
 
           }
          
         }
       })
-      const sucembed = new discord.MessageEmbed()
+      const guiltemb = new discord.MessageEmbed()
       .setAuthor("✅ Başarılı!")
       .setDescription("**Gelmeyen Katılımcılar Çağırıldı**")
       .setColor("GREEN")
-      message.channel.send(sucembed)
+      message.channel.send(guiltemb)
     }   
 
 };
