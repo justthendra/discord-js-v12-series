@@ -1,15 +1,15 @@
 // Otorol Sistemi V2
 
 client.on('guildMemberAdd', async member => {
-    const kanal = db.fetch(`ThdOtorolKanal_${member.guild.id}`)
-    const kanal2 = member.guild.channels.cache.get(kanal)
-    const rol = await db.fetch(`ThdOtorol_${member.guild.id}`)
-    const rol2 = member.guild.roles.cache.get(rol)
-    member.roles.add(rol2);
+    const channel = db.fetch(`ThdOtorolKanal_${member.guild.id}`)
+    const channell = member.guild.channels.cache.get(channel)
+    const role = await db.fetch(`ThdOtorol_${member.guild.id}`)
+    const rolee = member.guild.roles.cache.get(role)
+    member.roles.add(rolee);
 
     const moment = require('moment')
 
-     let aylar = {
+     let months = {
                "01": "Ocak",
                "02": "Şubat",
                "03": "Mart",
@@ -24,34 +24,34 @@ client.on('guildMemberAdd', async member => {
                "12": "Aralık"
     }
 
-  let bitiş = member.user.createdAt
-      let günü = moment(new Date(bitiş).toISOString()).format('DD')
-      let ayı = moment(new Date(bitiş).toISOString()).format('MM').replace("01", "Ocak").replace("02","Şubat").replace("03","Mart").replace("04", "Nisan").replace("05", "Mayıs").replace("06", "Haziran").replace("07", "Temmuz").replace("08", "Ağustos").replace("09", "Eylül").replace("10","Ekim").replace("11","Kasım").replace("12","Aralık")
-     let yılı =  moment(new Date(bitiş).toISOString()).format('YYYY')
-     let saati = moment(new Date(bitiş).toISOString()).format('HH:mm')
+  let finish = member.user.createdAt
+      let day = moment(new Date(finish).toISOString()).format('DD')
+      let month = moment(new Date(finish).toISOString()).format('MM').replace("01", "Ocak").replace("02","Şubat").replace("03","Mart").replace("04", "Nisan").replace("05", "Mayıs").replace("06", "Haziran").replace("07", "Temmuz").replace("08", "Ağustos").replace("09", "Eylül").replace("10","Ekim").replace("11","Kasım").replace("12","Aralık")
+     let year =  moment(new Date(finish).toISOString()).format('YYYY')
+     let hour = moment(new Date(finish).toISOString()).format('HH:mm')
 
-let günay = `${günü} ${ayı} ${yılı} ${saati}`  
+let daymon = `${day} ${month} ${year} ${hour}`  
 
-      let süre = member.user.createdAt
-      let gün = moment(new Date(süre).toISOString()).format('DD')
-      let hafta = moment(new Date(süre).toISOString()).format('WW')
-      let ay = moment(new Date(süre).toISOString()).format('MM')
-      let ayy = moment(new Date(süre).toISOString()).format('MM')
-      let yıl =  moment(new Date(süre).toISOString()).format('YYYY')
-     let yıl2 = moment(new Date().toISOString()).format('YYYY')
+      let time = member.user.createdAt
+      let day = moment(new Date(time).toISOString()).format('DD')
+      let weeks = moment(new Date(time).toISOString()).format('WW')
+      let month = moment(new Date(time).toISOString()).format('MM')
+      let monthh = moment(new Date(time).toISOString()).format('MM')
+      let year =  moment(new Date(time).toISOString()).format('YYYY')
+     let yearr = moment(new Date().toISOString()).format('YYYY')
 
-     let netyıl = yıl2 - yıl
+     let netyear = yearr - year
 
-     let created = ` ${netyıl} yıl  ${ay} ay ${hafta} hafta ${gün} gün önce`
+     let created = ` ${netyear} yıl  ${month} ay ${weeks} hafta ${day} gün önce`
 
-     let kontrol;
-     if(süre < 1296000000) kontrol = 'Tehlikeli! ❌'
-     if(süre > 1296000000) kontrol = 'Güvenilir! <:onay:894244398940954654>'
+     let check;
+     if(time < 1296000000) check = 'Tehlikeli! ❌'
+     if(time > 1296000000) check = 'Güvenilir! <:onay:894244398940954654>'
     
-    let curwels = new Discord.MessageEmbed()
+    let thendra = new Discord.MessageEmbed()
      .setColor('GREEN')
-     .setDescription(`<:onay:894244398940954654> **Sunucuya Yeni Katılan** **<@${member.id}>** **İsimli Kullanıcıya** ${rol2} **Rolünü Verdim.**\n\n👋🏻 **Hoşgeldin, <@${member.id}>**!\n\nHesap Güvenilir mi? **${kontrol}**`)
+     .setDescription(`<:onay:894244398940954654> **Sunucuya Yeni Katılan** **<@${member.id}>** **İsimli Kullanıcıya** ${rolee} **Rolünü Verdim.**\n\n👋🏻 **Hoşgeldin, <@${member.id}>**!\n\nHesap Güvenilir mi? **${check}**`)
      .setTimestamp()
-     .setFooter(`© 2021 Akhyls - Otorol Sistemi`, client.user.displayAvatarURL())
-     kanal2.send(curwels)
+     .setFooter(`© 2021 v12 series - Otorol Sistemi`, client.user.displayAvatarURL())
+     channell.send(thendra)
 })
