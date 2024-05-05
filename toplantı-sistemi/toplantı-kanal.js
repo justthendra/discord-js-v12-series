@@ -5,11 +5,11 @@ const db = require("quick.db")
 exports.run = async(client, message, args) => {
 
     if(message.guild == null) return
-    let kanalid = args[0]
+    let channelID = args[0]
 
 
     if (!message.member.hasPermission("ADMINISTRATOR")) {
-      const yetkinyokmeh = new discord.MessageEmbed()
+      const notAuthority = new discord.MessageEmbed()
         .setAuthor("❌ Yetersiz Yetki!")
         .setDescription("**Bu Komudu Kullanman İçin `Yönetici` Yetkisine Sahip Olmalısın!**")
         .setColor("RED")
@@ -17,8 +17,8 @@ exports.run = async(client, message, args) => {
     }
 
 
-    if (!kanalid) {
-      const idyokmeh = new discord.MessageEmbed()
+    if (!channelID) {
+      const notID = new discord.MessageEmbed()
         .setAuthor("❌ Eksik Argüman!")
         .setDescription("**Toplantı Kanalını Ayarlamak İçin O Kanalın ID'sini Belirtmelisiniz!**")
         .setColor("RED")
@@ -27,7 +27,7 @@ exports.run = async(client, message, args) => {
 
 
 
-    if(isNaN(kanalid)) {
+    if(isNaN(channelID)) {
       const nan = new discord.MessageEmbed()
       .setAuthor("❌ Yanlış Argüman!")
       .setDescription("**Kanal ID'si Sadece Rakamlardan Oluşabilir!**")
@@ -35,35 +35,35 @@ exports.run = async(client, message, args) => {
       return message.channel.send(nan)
     }
 
-    const channelfetch = client.channels.cache.get(kanalid)
+    const channelfetch = client.channels.cache.get(channelID)
     if(typeof(channelfetch) == "undefined") {
-      const yok = new discord.MessageEmbed()
+      const not = new discord.MessageEmbed()
       .setAuthor("❌ Yanlış Argüman!")
       .setColor("RED")
       .setDescription("**Böyle Bir Kanal ID'si Bulunamadı**")
-      return message.channel.send(yok)
+      return message.channel.send(not)
     }
     if(channelfetch.guild.id !== message.guild.id) {
-      const busunucudadeil = new discord.MessageEmbed()
+      const notonserver = new discord.MessageEmbed()
       .setAuthor("❌ Yanlış Argüman!")
       .setDescription("**Belirttiğiniz Kanal ID'si Bulunamadı Bu Kanala Erişimim Olmayabilir Veya Bu Kanal Bu Sunucuda Yok**")
       .setColor("RED")
-      return message.channel.send(busunucudadeil)
+      return message.channel.send(notonserver)
     }
     if(channelfetch.type !== "voice") {
-      const seslideil = new discord.MessageEmbed()
+      const notvoice = new discord.MessageEmbed()
       .setAuthor("❌ Yanlış Argüman!")
       .setColor("RED")
       .setDescription("**Belirttiğiniz Kanal Sesli Bir Kanal Olmalıdır!**")
-      return message.channel.send(seslideil)
+      return message.channel.send(notvoice)
     }
-    db.set(`guildtoplantichannel_${message.guild.id}`, kanalid)
+    db.set(`guildtoplantichannel_${message.guild.id}`, channelID)
 
-    const sucembed = new discord.MessageEmbed()
+    const guiltEmb = new discord.MessageEmbed()
     .setAuthor("✅ Başarılı!")
     .setDescription("**Toplantı Kanalı Belirttiğiniz Kanal ID'si Olarak Ayarlandı!**")
     .setColor("GREEN")
-    return message.channel.send(sucembed)
+    return message.channel.send(guiltEmb)
 
 
 };
