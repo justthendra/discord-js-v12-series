@@ -4,8 +4,8 @@ const ms = require("ms");
 
 exports.run = async (client, message, args) => {    
 if (db.has(`ThdMuteLog_${message.guild.id}`) === false) return message.reply(`Mute-Log Kanalı Ayarlanmamış. Örnek: \`t-mutelog ayarla <#kanal>\``);
-const kanal = db.get(`ThdMuteLog_${message.guild.id}`)
-const mutelog = message.guild.channels.cache.get(kanal)
+const channel = db.get(`ThdMuteLog_${message.guild.id}`)
+const mutelog = message.guild.channels.cache.get(channel)
 
 var muterole1 = db.fetch(`ThdMuteRol_${message.guild.id}`);
 var muterole2 = message.guild.roles.cache.find(r => r.id === muterole1);
@@ -37,33 +37,33 @@ if (!muterole2) {
 
 };
 
-var kisi = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));
-if (!kisi) return message.reply("Susturmasını Açmam İçin Bir Kullanıcı Belirtiniz!");
-const adam = client.users.cache.get(kisi.id)
+var user = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));
+if (!user) return message.reply("Susturmasını Açmam İçin Bir Kullanıcı Belirtiniz!");
+const member = client.users.cache.get(user.id)
 
- if(!kisi.roles.cache.find(r => r.id === muterole2.id)) return message.reply("Kişi Daha Önceden Susturulmamış!")
+ if(!user.roles.cache.find(r => r.id === muterole2.id)) return message.reply("Kişi Daha Önceden Susturulmamış!")
 
  
 var reason = args.slice(1).join(" ")
 
 if(reason){ // Sebep Belirtildiyse
-    await kisi.roles.remove(muterole2.id);
-    message.channel.send(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
+    await user.roles.remove(muterole2.id);
+    message.channel.send(`**${user}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
     const unmuteembed = new Discord.MessageEmbed()
     .setTitle(`İşlem - Kullanıcı Susturulması Kaldırma`)
-    .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
-    .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}\n **Sebep:** ${reason}`)
+    .setThumbnail(member.displayAvatarURL({ dynamic: true }))
+    .setDescription(`**${user}** Susturulması Açıldı!\n**Yetkili:** ${message.author}\n **Sebep:** ${reason}`)
     .setColor(`GREEN`)
     .setFooter(`© 2021 Thendra`, client.user.avatarURL())
     .setTimestamp()
     mutelog.send(unmuteembed)
 } else { // Sebep belirtilmediyse
-    await kisi.roles.remove(muterole2.id);
-    message.channel.send(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
+    await user.roles.remove(muterole2.id);
+    message.channel.send(`**${user}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`);
     const unmuteembed2 = new Discord.MessageEmbed()
     .setTitle(`İşlem - Kullanıcı Susturulması Kaldırma`)
-    .setThumbnail(adam.displayAvatarURL({ dynamic: true }))
-    .setDescription(`**${kisi}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`)
+    .setThumbnail(member.displayAvatarURL({ dynamic: true }))
+    .setDescription(`**${user}** Susturulması Açıldı!\n**Yetkili:** ${message.author}`)
     .setColor(`GREEN`)
     .setFooter(`© 2021 Thendra`, client.user.avatarURL())
     .setTimestamp()
